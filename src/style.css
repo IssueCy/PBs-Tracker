@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D9D9D9;
+    font-family: "Inter", sans-serif;
+}
+
+/*? ---------- Reusable components ---------- */
+.button_primary {
+    border: none;
+    background-color: #495CBF;
+    padding: 12px;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 4px 4px 15px #283575;
+}
+/*? ----------------------------------------- */
+
+/*? top section */
+.top-section {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-section-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+#return-button {
+    visibility: hidden;
+    border: none;
+    background-color: transparent;
+}
+
+#return-button img {
+    width: 30px;
+}
+
+.tsg-logo {
+    width: 80px;
+}
+
+
+/*? main sections */
+#main-section-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#addPB-button {
+    align-self: center;
+    margin-bottom: 24px;
+}
+
+#shortCourse-section, #longCourse-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-span {
+    border-top: 1px solid rgb(43, 43, 43);
+    border-bottom: 1px solid rgb(43, 43, 43);
+    text-align: center;
+    font-weight: bold;
+}
+
+/*? add PB section */
+#addPb-section-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#addPb-section-container label {
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+#addPb-section-container select, #addPb-section-container input {
+    height: 32px;
+    width: 50%;
+    border-radius: 8px;
+    border: 1px solid #283575;
+    padding: 8px;
+}
+
+
+/*? bottom navbar */
+.navbar {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 70px;
+    background-color: #495CBF;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.nav-buttons {
+    width: 80px;
+    background-color: transparent;
+    border: none;
+}
+
+.nav-buttons img {
+    width: 40px;
+}

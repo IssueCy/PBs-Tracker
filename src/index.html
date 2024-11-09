@@ -1,11 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PBs Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    
+
+    <div class="top-section">
+        <div class="top-section-wrapper">
+            <button class="returnToHome" id="return-button"><img src="../assets/arrow-back-icon.svg" alt="return-button"></button>
+            <img class="tsg-logo" src="../assets/tsg-logo.png" alt="tsg-logo">
+        </div>
+    </div>
+
+    <br>
+
+    <!-- Home section -->
+    <div id="main-section-container">
+        <button class="button_primary addPbButton" id="addPB-button">Neue Bestzeit hinzufügen</button>
+
+        <div id="shortCourse-section">
+            <span class="course-span">Kurzbahn</span>
+        </div>
+
+        <br>
+        <br>
+
+        <div id="longCourse-section">
+            <span class="course-span">Langbahn</span>
+        </div>
+    </div>
+
+    <!-- Add PB section -->
+    <div id="addPb-section-container">
+        <h3>Neue Bestzeit erstellen</h3>
+        <label for="eventOptions">Strecke </label>
+        <select name="events" id="eventOptions">
+            <option>50 Delfin</option>
+            <option>100 Delfin</option>
+            <option>200 Delfin</option>
+            <option>50 Rücken</option>
+            <option>100 Rücken</option>
+            <option>200 Rücken</option>
+            <option>50 Brust</option>
+            <option>100 Brust</option>
+            <option>200 Brust</option>
+            <option>50 Kraul</option>
+            <option>100 Kraul</option>
+            <option>200 Kraul</option>
+            <option>400 Kraul</option>
+            <option>800 Kraul</option>
+            <option>1500 Kraul</option>
+            <option>100 Lagen</option>
+            <option>200 Lagen</option>
+            <option>400 Lagen</option>
+        </select>
+        <label for="timeInput">Zeit </label>
+        <input id="timeInput" type="time" step="1">
+        <label for="courseInput">Bahnlänge </label>
+        <select name="cours" id="courseInput">
+            <option>25m</option>
+            <option>50m</option>
+        </select>
+        <br>
+        <button class="button_primary" id="create-new-pb-button">Speichern</button>
+    </div>
+
+
+
+    <div class="navbar">
+        <button class="nav-buttons returnToHome" id="nav-home-section-button"><img src="../assets/home-icon.svg"
+                alt="home-icon"></button>
+        <button class="nav-buttons addPbButton" id="nav-add-section-button"><img src="../assets/add-icon.svg"
+                alt="add-icon"></button>
+        <button class="nav-buttons" id="nav-profile-section-button"><img src="../assets/account-icon.svg"
+                alt="profile-icon"></button>
+    </div>
+
+
+    <script src="script.js"></script>
 </body>
 </html>
