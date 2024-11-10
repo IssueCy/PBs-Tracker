@@ -80,6 +80,7 @@ body {
 #addPb-section-container label {
     margin-top: 12px;
     margin-bottom: 4px;
+    font-size: large;
 }
 
 #addPb-section-container select, #addPb-section-container input {
@@ -87,9 +88,38 @@ body {
     width: 50%;
     border-radius: 8px;
     border: 1px solid #283575;
+    padding-left: 12px;
+    font-size: 16px;
+}
+
+/*? profile section*/
+#profile-section-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#profile-section-container button {
+    height: 32px;
+    border: none;
+    color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 4px 4px 15px #141c46;
     padding: 8px;
 }
 
+#profile-section-container p {
+    margin: 12px;
+    font-size: 14px;
+}
+
+#deleteData-button {
+    background-color: #c21111a6;
+}
+
+#downloadData-button {
+    background-color: rgba(79, 158, 96, 0.726);
+}
 
 /*? bottom navbar */
 .navbar {
