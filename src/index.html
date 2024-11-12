@@ -41,26 +41,26 @@
     <!-- Add PB section -->
     <div id="addPb-section-container">
         <h3>Neue Bestzeit hinzufügen</h3>
-        <label for="eventOptions">Strecke </label>
-        <select name="events" id="eventOptions">
-            <option>50 Delfin</option>
-            <option>100 Delfin</option>
-            <option>200 Delfin</option>
-            <option>50 Rücken</option>
-            <option>100 Rücken</option>
-            <option>200 Rücken</option>
-            <option>50 Brust</option>
-            <option>100 Brust</option>
-            <option>200 Brust</option>
-            <option>50 Kraul</option>
-            <option>100 Kraul</option>
-            <option>200 Kraul</option>
-            <option>400 Kraul</option>
-            <option>800 Kraul</option>
-            <option>1500 Kraul</option>
-            <option>100 Lagen</option>
-            <option>200 Lagen</option>
-            <option>400 Lagen</option>
+        <label for="eventInput">Strecke </label>
+        <select name="events" id="eventInput">
+            <option value="50 Delfin">50 Delfin</option>
+            <option value="100 Delfin">100 Delfin</option>
+            <option value="200 Delfin">200 Delfin</option>
+            <option value="50 Rücken">50 Rücken</option>
+            <option value="100 Rücken">100 Rücken</option>
+            <option value="200 Rücken">200 Rücken</option>
+            <option value="50 Brust">50 Brust</option>
+            <option value="100 Brust">100 Brust</option>
+            <option value="200 Brust">200 Brust</option>
+            <option value="50 Kraul">50 Kraul</option>
+            <option value="100 Kraul">100 Kraul</option>
+            <option value="200 Kraul">200 Kraul</option>
+            <option value="400 Kraul">400 Kraul</option>
+            <option value="800 Kraul">800 Kraul</option>
+            <option value="1500 Kraul">1500 Kraul</option>
+            <option value="100 Lagen">100 Lagen</option>
+            <option value="200 Lagen">200 Lagen</option>
+            <option value="400 Lagen">400 Lagen</option>
         </select>
         <label for="timeInput">Zeit </label>
         <input id="timeInput" type="time" step="1">
@@ -70,7 +70,7 @@
             <option>50m</option>
         </select>
         <br>
-        <button class="button_primary" id="create-new-pb-button">Speichern</button>
+        <button onclick="saveAndDisplayPB()" class="button_primary" id="create-new-pb-button">Speichern</button>
     </div>
 
     <!-- Profile Section -->
@@ -86,8 +86,12 @@
         <p>
             Daten, die innerhalb dieser App generiert wurden, werden lokal auf deinem Gerät gespeichert.
         <br>
-            Es werden keine Daten online gespeichert.
+            Es werden keine Daten auf Servern oder in Datenbanken gespeichert.
+        <br>
+        Du kannst deine Daten jederzeit restlos löschen, indem du auf "Daten löschen" klickst.
         </p>
+
+        <img src="../assets/Swim-rafiki.svg" alt="Swim illustration">
     </div>
 
 

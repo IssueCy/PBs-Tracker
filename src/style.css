@@ -121,9 +121,14 @@ body {
     background-color: rgba(79, 158, 96, 0.726);
 }
 
+#profile-section-container img {
+    width: 300px;
+}
+
 /*? bottom navbar */
 .navbar {
     position: fixed;
+    z-index: 5;
     bottom: 0px;
     width: 100%;
     height: 70px;
