@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB's Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="top-section">
+        <div class="top-section-wrapper">
+            <button class="returnToHome" id="return-button"><img src="../assets/arrow-back-icon.svg" alt="return-button"></button>
+            <img class="tsg-logo" src="../assets/tsg-logo.png" alt="tsg-logo">
+        </div>
+    </div>
+
+    <!-- Home section -->
+    <div id="main-section-container">
+        <button class="button_primary addPbButton" id="addPB-button">Neue Bestzeit hinzufügen</button>
+
+        <div id="shortCourse-section">
+            <span class="course-span">Kurzbahn</span>
+            <div id="shortCourse-new-container-wrapper">
+
+            </div>
+        </div>
+
+        <br>
+
+        <div id="longCourse-section">
+            <span class="course-span">Langbahn</span>
+            <div id="longCourse-new-container-wrapper">
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <!-- Add PB section -->
+    <div id="addPb-section-container">
+        <h3>Neue Bestzeit hinzufügen</h3>
+        <label for="eventInput">Strecke </label>
+        <select name="events" id="eventInput">
+            <option value="50 Delfin">50 Delfin</option>
+            <option value="100 Delfin">100 Delfin</option>
+            <option value="200 Delfin">200 Delfin</option>
+            <option value="50 Rücken">50 Rücken</option>
+            <option value="100 Rücken">100 Rücken</option>
+            <option value="200 Rücken">200 Rücken</option>
+            <option value="50 Brust">50 Brust</option>
+            <option value="100 Brust">100 Brust</option>
+            <option value="200 Brust">200 Brust</option>
+            <option value="50 Kraul">50 Kraul</option>
+            <option value="100 Kraul">100 Kraul</option>
+            <option value="200 Kraul">200 Kraul</option>
+            <option value="400 Kraul">400 Kraul</option>
+            <option value="800 Kraul">800 Kraul</option>
+            <option value="1500 Kraul">1500 Kraul</option>
+            <option value="100 Lagen">100 Lagen</option>
+            <option value="200 Lagen">200 Lagen</option>
+            <option value="400 Lagen">400 Lagen</option>
+        </select>
+        <label for="timeInput">Zeit </label>
+        <input id="timeInput" type="time" step="1">
+        <label for="courseInput">Bahnlänge </label>
+        <select name="cours" id="courseInput">
+            <option>25m</option>
+            <option>50m</option>
+        </select>
+        <br>
+        <button onclick="saveAndDisplayPB()" class="button_primary" id="create-new-pb-button">Speichern</button>
+    </div>
+
+    <!-- Profile Section -->
+    <div id="profile-section-container">
+        <h3>Dein Profil</h3>
+        <br>
+        <button id="deleteData-button">Daten löschen</button>
+        <br>
+        <button id="downloadData-button">Daten herunterladen</button>
+        <br>
+        <hr style="width: 100%; height: 2px; color: black;">
+        <br>
+        <p>
+            Daten, die innerhalb dieser App generiert wurden, werden lokal auf deinem Gerät gespeichert.
+        <br>
+            Es werden keine Daten auf Servern oder in Datenbanken gespeichert.
+        <br>
+        Du kannst deine Daten jederzeit restlos löschen, indem du auf "Daten löschen" klickst.
+        </p>
+
+        <img src="../assets/Swim-rafiki.svg" alt="Swim illustration">
+    </div>
+
+
+    
+    
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <button class="nav-buttons returnToHome" id="nav-home-section-button"><img src="../assets/home-icon.svg"
+                alt="home-icon"></button>
+        <button class="nav-buttons addPbButton" id="nav-add-section-button"><img src="../assets/add-icon.svg"
+                alt="add-icon"></button>
+        <button class="nav-buttons" id="nav-profile-section-button"><img src="../assets/account-icon.svg"
+                alt="profile-icon"></button>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

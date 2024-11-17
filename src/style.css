@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D9D9D9;
+    font-family: "Inter", sans-serif;
+}
+
+/*? ---------- Reusable components ---------- */
+.button_primary {
+    border: none;
+    background-color: #495CBF;
+    padding: 12px;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 4px 4px 15px #283575;
+}
+/*? ----------------------------------------- */
+
+/*? top section */
+.top-section {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-section-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+#return-button {
+    visibility: hidden;
+    border: none;
+    background-color: transparent;
+}
+
+#return-button img {
+    width: 30px;
+}
+
+.tsg-logo {
+    width: 80px;
+}
+
+
+/*? main sections */
+#main-section-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#addPB-button {
+    align-self: center;
+    margin-bottom: 24px;
+}
+
+#shortCourse-section, #longCourse-section {
+    display: flex;
+    flex-direction: column;
+}
+
+#shortCourse-new-container-wrapper, #longCourse-new-container-wrapper {
+    display: flex; /* Aktiviert Flexbox */
+    flex-wrap: wrap; /* Erlaubt den Umbruch in eine neue Zeile */
+    gap: 16px; /* Abstand zwischen den Containern */
+    justify-content: flex-start;
+}
+
+.course-span {
+    border-top: 1px solid rgb(43, 43, 43);
+    border-bottom: 1px solid rgb(43, 43, 43);
+    text-align: center;
+    font-weight: bold;
+}
+
+.newContainer {
+    margin: 8px;
+    padding: 12px;
+    width: 130px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #94B9FF;
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+/*? add PB section */
+#addPb-section-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#addPb-section-container label {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-size: large;
+}
+
+#addPb-section-container select, #addPb-section-container input {
+    height: 32px;
+    width: 50%;
+    border-radius: 8px;
+    border: 1px solid #283575;
+    padding-left: 12px;
+    font-size: 16px;
+}
+
+.edit-button, .delete-button {
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2C2C2C;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 16px;
+    margin: 4px;
+}
+
+.edit-button {
+    background-image: url('../assets/edit-icon.svg');
+}
+
+.delete-button {
+    background-image: url('../assets/delete-icon.svg');
+}
+
+/*? profile section*/
+#profile-section-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#profile-section-container button {
+    height: 32px;
+    border: none;
+    color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 4px 4px 15px #141c46;
+    padding: 8px;
+}
+
+#profile-section-container p {
+    margin: 12px;
+    font-size: 14px;
+}
+
+#deleteData-button {
+    background-color: #c21111a6;
+}
+
+#downloadData-button {
+    background-color: rgba(79, 158, 96, 0.726);
+}
+
+#profile-section-container img {
+    width: 300px;
+}
+
+/*? bottom navbar */
+.navbar {
+    position: fixed;
+    z-index: 5;
+    bottom: 0px;
+    width: 100%;
+    height: 70px;
+    background-color: #495CBF;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.nav-buttons {
+    width: 80px;
+    background-color: transparent;
+    border: none;
+}
+
+.nav-buttons img {
+    width: 40px;
+}
