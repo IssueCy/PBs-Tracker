@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PB's Tracker</title>
+    <link rel="icon" href="../assets/Swim-rafiki.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -103,7 +104,16 @@
         <img src="../assets/Swim-rafiki.svg" alt="Swim illustration">
     </div>
 
-
+    <!-- Edit time section -->
+     <div id="edit-time-container">
+        <h3>Bearbeiten</h3>
+        <br>
+        <p id="time-to-edit-container" style="font-weight: bold;"></p>
+        <label for="newTimeInput">Neue Zeit</label>
+        <input id="newTimeInput" type="time" step="1">
+        <br><br>
+        <button class="button_primary" onclick="editTime()">Speichern</button>
+     </div>
     
     
     <!-- Navbar Section -->

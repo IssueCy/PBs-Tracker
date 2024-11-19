@@ -17,6 +17,10 @@ PB's Tracker is a web app that allows swimmers to record and track their persona
 PB's Tracker stores data locally on your device. There are no external servers or databases involved, meaning that your personal bests and other data remain private and are only accessible on the device where they were saved.  
 You have the freedom to delete all your data at any time.
 
+### Attributions
+**Sport illustrations by Storyset**
+- https://storyset.com/sport
+
 ---
 
 ## Deutsche Version

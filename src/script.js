@@ -6,6 +6,7 @@ const longCourseSection = document.getElementById('longCourse-new-container-wrap
 const homeSection = document.getElementById('main-section-container');
 const addPbSection = document.getElementById('addPb-section-container');
 const profileSection = document.getElementById('profile-section-container');
+const editSection = document.getElementById('edit-time-container');
 
 //* home tab
 const returnToHome = document.querySelectorAll('.returnToHome');
@@ -16,6 +17,7 @@ for (button of returnToHome) {
         homeSection.style.display = "flex";
         addPbSection.style.display = "none";
         profileSection.style.display = "none";
+        editSection.style.display = "none";
     });
 }
 
@@ -29,6 +31,7 @@ for (button of addPbButtons) {
         returnButton.style.visibility = "visible";
         homeSection.style.display = "none";
         profileSection.style.display = "none";
+        editSection.style.display = "none";
     });
 }
 
@@ -40,6 +43,7 @@ profileButton.addEventListener('click', () => {
     returnButton.style.visibility = "visible";
     homeSection.style.display = "none";
     addPbSection.style.display = "none";
+    editSection.style.display = "none";
 });
 
 //? Delete data
@@ -59,25 +63,29 @@ let eventInput = document.getElementById('eventInput');
 let timeInput = document.getElementById('timeInput');
 let courseInput = document.getElementById('courseInput');
 
+let addedEvents = new Set();
+
 timeInput.value = "00:00:00";
 
 function saveAndDisplayPB() {
     let eventType = eventInput.value;
     let time = timeInput.value;
     let course = courseInput.value;
+    let uniqueEventKey = `${eventType}-${course}`;
 
-    localStorage.setItem("event", eventType);
-    localStorage.setItem("time", time);
-    localStorage.setItem("course", course);
+    if (addedEvents.has(uniqueEventKey)) {
+        alert("Dieses Strecke wurde bereits hinzugefügt.");
+        console.warn("Failed: Cannot add multiple events of the same type");
+        return;
+    }
+
+    addedEvents.add(uniqueEventKey);
 
     let newPbContainer = document.createElement("div");
     newPbContainer.classList.add('newContainer');
 
-    if (course == "25m") {
-        shortCourseSection.appendChild(newPbContainer);
-    } else {
-        longCourseSection.appendChild(newPbContainer);
-    }
+    let section = course == "25m" ? shortCourseSection : longCourseSection;
+    section.appendChild(newPbContainer)
 
     //TODO      add feature to update date if the event is updated
     //! creation date
@@ -108,7 +116,7 @@ function saveAndDisplayPB() {
     let editButton = document.createElement("button");
     editButton.classList.add('edit-button');
     editButton.onclick = () => {
-        alert("Bearbeiten wurde geklickt!");
+        displayEditTimeSection();
     };
     newPbContainer.appendChild(editButton);
     buttonWrapper.appendChild(editButton);
@@ -134,4 +142,26 @@ function saveAndDisplayPB() {
     addPbSection.style.display = "none";
     profileSection.style.display = "none";
 
+}
+
+//? Edit times logic
+
+const newTime = document.getElementById('newTimeInput');
+
+function displayEditTimeSection() {
+    homeSection.style.display = "none";
+    addPbSection.style.display = "none";
+    profileSection.style.display = "none";
+    editSection.style.display = "flex";
+    returnButton.style.visibility = "visible";
+
+    newTime.value = "00:00:00";
+}
+
+function editTime() {
+    homeSection.style.display = "flex";
+    addPbSection.style.display = "none";
+    profileSection.style.display = "none";
+    editSection.style.display = "none";
+    returnButton.style.visibility = "hidden";
 }
