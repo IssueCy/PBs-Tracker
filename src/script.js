@@ -52,6 +52,7 @@ document.getElementById('deleteData-button').addEventListener('click', (event) =
 
     if (confirm("Willst du deine Daten aus dieser App restlos löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.")) {
         localStorage.clear();
+    
     }
     //TODO:     Clear previous user input in document
 });
@@ -66,6 +67,8 @@ let courseInput = document.getElementById('courseInput');
 let addedEvents = new Set();
 
 timeInput.value = "00:00:00";
+
+let currentEditingContainer = null;
 
 function saveAndDisplayPB() {
     let eventType = eventInput.value;
@@ -85,9 +88,8 @@ function saveAndDisplayPB() {
     newPbContainer.classList.add('newContainer');
 
     let section = course == "25m" ? shortCourseSection : longCourseSection;
-    section.appendChild(newPbContainer)
+    section.appendChild(newPbContainer);
 
-    //TODO      add feature to update date if the event is updated
     //! creation date
     let dateOfCreation = new Date().toLocaleDateString();
     let dateElement = document.createElement("p");
@@ -116,9 +118,13 @@ function saveAndDisplayPB() {
     let editButton = document.createElement("button");
     editButton.classList.add('edit-button');
     editButton.onclick = () => {
-        displayEditTimeSection();
+        currentEditingContainer = {
+            container: newPbContainer,
+            timeElement: timeElement,
+            dateElement: dateElement
+        };
+        displayEditTimeSection(time);
     };
-    newPbContainer.appendChild(editButton);
     buttonWrapper.appendChild(editButton);
     
     //! delete button
@@ -126,42 +132,49 @@ function saveAndDisplayPB() {
     deleteButton.classList.add('delete-button');
     deleteButton.onclick = () => {
         newPbContainer.remove();
-        //TODO      Clear from localstorage too
+        addedEvents.delete(uniqueEventKey);
     };
-    newPbContainer.appendChild(deleteButton);
     buttonWrapper.appendChild(deleteButton);
 
-    //? Reset input fields
     eventInput.selectedIndex = 0;
     timeInput.value = "00:00:00";
     courseInput.selectedIndex = 0;
 
-    //? Navigate back to the home section
     document.getElementById('return-button').style.visibility = "hidden";
     homeSection.style.display = "flex";
     addPbSection.style.display = "none";
     profileSection.style.display = "none";
-
 }
 
-//? Edit times logic
+let newTime = document.getElementById('newTimeInput');
 
-const newTime = document.getElementById('newTimeInput');
-
-function displayEditTimeSection() {
+function displayEditTimeSection(currentTime) {
     homeSection.style.display = "none";
     addPbSection.style.display = "none";
     profileSection.style.display = "none";
     editSection.style.display = "flex";
     returnButton.style.visibility = "visible";
 
-    newTime.value = "00:00:00";
+    newTime.value = currentTime || "00:00:00";
 }
 
 function editTime() {
-    homeSection.style.display = "flex";
-    addPbSection.style.display = "none";
-    profileSection.style.display = "none";
-    editSection.style.display = "none";
-    returnButton.style.visibility = "hidden";
+    const updatedTime = newTime.value;
+
+    if (currentEditingContainer) {
+        currentEditingContainer.timeElement.textContent = updatedTime;
+
+        const updatedDate = new Date().toLocaleDateString();
+        currentEditingContainer.dateElement.textContent = updatedDate;
+
+        homeSection.style.display = "flex";
+        addPbSection.style.display = "none";
+        profileSection.style.display = "none";
+        editSection.style.display = "none";
+        returnButton.style.visibility = "hidden";
+
+        currentEditingContainer = null;
+    } else {
+        alert("Kein Element zum Bearbeiten gefunden.");
+    }
 }
