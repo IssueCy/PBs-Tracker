@@ -73,7 +73,7 @@
             <option value="400 Lagen">400 Lagen</option>
         </select>
         <label for="timeInput">Zeit </label>
-        <input id="timeInput" type="time" step="1">
+        <input id="timeInput" type="time" step="0.001">
         <label for="courseInput">Bahnlänge </label>
         <select name="cours" id="courseInput">
             <option>25m</option>
@@ -89,7 +89,7 @@
         <br>
         <button id="deleteData-button">Daten löschen</button>
         <br>
-        <button id="downloadData-button">Daten herunterladen</button>
+        <button onclick="exportData()" id="downloadData-button">Daten herunterladen</button>
         <br>
         <hr style="width: 100%; height: 2px; color: black;">
         <br>
@@ -110,7 +110,7 @@
         <br>
         <p id="time-to-edit-container" style="font-weight: bold;"></p>
         <label for="newTimeInput">Neue Zeit</label>
-        <input id="newTimeInput" type="time" step="1">
+        <input id="newTimeInput" type="time" step="0.001">
         <br><br>
         <button class="button_primary" onclick="editTime()">Speichern</button>
      </div>

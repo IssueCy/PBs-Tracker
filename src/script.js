@@ -1,4 +1,3 @@
-
 const shortCourseSection = document.getElementById('shortCourse-new-container-wrapper');
 const longCourseSection = document.getElementById('longCourse-new-container-wrapper');
 
@@ -52,101 +51,158 @@ document.getElementById('deleteData-button').addEventListener('click', (event) =
 
     if (confirm("Willst du deine Daten aus dieser App restlos löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.")) {
         localStorage.clear();
-    
+        location.reload();
     }
-    //TODO:     Clear previous user input in document
 });
 
+//? export data
+function exportData() {
+    if (confirm("You are about to download the 'data.json' file containing your PB data.")) {
+      const data = {
+        pbData: JSON.parse(localStorage.getItem("pbData")) || []
+      };
+
+      const dataStr = JSON.stringify(data, null, 2);
+      const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+
+      const exportFileDefaultName = "pbData.json";
+  
+      const linkElement = document.createElement("a");
+      linkElement.setAttribute("href", dataUri);
+      linkElement.setAttribute("download", exportFileDefaultName);
+      linkElement.click();
+    }
+  }
 
 //? Add PB logic
 
+// global variables
 let eventInput = document.getElementById('eventInput');
 let timeInput = document.getElementById('timeInput');
 let courseInput = document.getElementById('courseInput');
-
+let newTime = document.getElementById('newTimeInput');
 let addedEvents = new Set();
-
-timeInput.value = "00:00:00";
-
 let currentEditingContainer = null;
+let pbData = JSON.parse(localStorage.getItem('pbData')) || [];
 
-function saveAndDisplayPB() {
-    let eventType = eventInput.value;
-    let time = timeInput.value;
-    let course = courseInput.value;
-    let uniqueEventKey = `${eventType}-${course}`;
+function loadPBData() {
+    pbData.forEach((pb) => {
+        renderPB(pb);
+        addedEvents.add(`${pb.event}-${pb.course}`);
+    });
+}
 
-    if (addedEvents.has(uniqueEventKey)) {
-        alert("Dieses Strecke wurde bereits hinzugefügt.");
-        console.warn("Failed: Cannot add multiple events of the same type");
-        return;
-    }
+function savePBToStorage() {
+    localStorage.setItem('pbData', JSON.stringify(pbData));
+}
 
-    addedEvents.add(uniqueEventKey);
+function deletePBFromStorage(uniqueKey) {
+    pbData = pbData.filter(pb => `${pb.event}-${pb.course}` !== uniqueKey);
+    savePBToStorage();
+}
+
+function updatePBInStorage(uniqueKey, newTime) {
+    pbData.forEach(pb => {
+        if (`${pb.event}-${pb.course}` === uniqueKey) {
+            pb.time = newTime;
+            pb.date = new Date().toLocaleDateString();
+        }
+    });
+}
+
+function renderPB(pb) {
+    const uniqueEventKey = `${pb.event}-${pb.course}`;
+    const section = pb.course === "25m" ? shortCourseSection : longCourseSection;
 
     let newPbContainer = document.createElement("div");
     newPbContainer.classList.add('newContainer');
 
-    let section = course == "25m" ? shortCourseSection : longCourseSection;
-    section.appendChild(newPbContainer);
-
-    //! creation date
-    let dateOfCreation = new Date().toLocaleDateString();
     let dateElement = document.createElement("p");
-    dateElement.textContent = `${dateOfCreation}`;
+    dateElement.textContent = pb.date;
     dateElement.style.color = "#686868";
     newPbContainer.appendChild(dateElement);
-    
-    //! event type
+
     let eventElement = document.createElement("p");
-    eventElement.textContent = `${eventType}`;
+    eventElement.textContent = pb.event;
     eventElement.style.fontWeight = "bold";
     newPbContainer.appendChild(eventElement);
-    
-    //! time
+
     let timeElement = document.createElement("p");
-    timeElement.textContent = `${time}`;
+    timeElement.textContent = pb.time;
     timeElement.style.fontWeight = "bold";
     newPbContainer.appendChild(timeElement);
 
-    //! wrapper for buttons
     let buttonWrapper = document.createElement("div");
     buttonWrapper.classList.add('buttonWrapper');
     newPbContainer.appendChild(buttonWrapper);
-    
-    //! edit button
+
     let editButton = document.createElement("button");
     editButton.classList.add('edit-button');
     editButton.onclick = () => {
         currentEditingContainer = {
             container: newPbContainer,
             timeElement: timeElement,
-            dateElement: dateElement
+            dateElement: dateElement,
+            uniqueKey: uniqueEventKey
         };
-        displayEditTimeSection(time);
+        displayEditTimeSection(pb.time);
     };
     buttonWrapper.appendChild(editButton);
-    
-    //! delete button
+
     let deleteButton = document.createElement("button");
     deleteButton.classList.add('delete-button');
     deleteButton.onclick = () => {
         newPbContainer.remove();
         addedEvents.delete(uniqueEventKey);
+        deletePBFromStorage(uniqueEventKey);
     };
     buttonWrapper.appendChild(deleteButton);
+
+    section.appendChild(newPbContainer);
+}
+
+timeInput.value = "00:00:00";
+function saveAndDisplayPB() {
+    let eventType = eventInput.value;
+    let time = timeInput.value;
+    let course = courseInput.value;
+    let uniqueEventKey = `${eventType}-${course}`;
+    let dateOfCreation = new Date().toLocaleDateString();
+
+    if (!eventType || !time || !course) {
+        alert("Bitte fülle alle Felder aus.");
+        return;
+    }
+
+    if (addedEvents.has(uniqueEventKey)) {
+        alert("Diese Strecke wurde bereits hinzugefügt.");
+        return;
+    }
+
+    if (time.startsWith("00:")) {
+        time = time.substring(3);
+    }
+
+    const pb = {
+        event: eventType,
+        time: time,
+        course: course,
+        date: dateOfCreation
+    };
+
+    addedEvents.add(uniqueEventKey);
+    pbData.push(pb);
+    renderPB(pb);
+
+    savePBToStorage();
 
     eventInput.selectedIndex = 0;
     timeInput.value = "00:00:00";
     courseInput.selectedIndex = 0;
 
-    document.getElementById('return-button').style.visibility = "hidden";
     homeSection.style.display = "flex";
     addPbSection.style.display = "none";
-    profileSection.style.display = "none";
 }
-
-let newTime = document.getElementById('newTimeInput');
 
 function displayEditTimeSection(currentTime) {
     homeSection.style.display = "none";
@@ -154,27 +210,34 @@ function displayEditTimeSection(currentTime) {
     profileSection.style.display = "none";
     editSection.style.display = "flex";
     returnButton.style.visibility = "visible";
-
-    newTime.value = currentTime || "00:00:00";
+    newTime.value = "00:00:00";
 }
 
+
 function editTime() {
-    const updatedTime = newTime.value;
-
+    let updatedTime = newTime.value;
     if (currentEditingContainer) {
-        currentEditingContainer.timeElement.textContent = updatedTime;
+        if (updatedTime.startsWith("00:")) {
+            updatedTime = updatedTime.substring(3);
+        }
 
+        const { timeElement, dateElement, uniqueKey } = currentEditingContainer;
+
+        timeElement.textContent = updatedTime;
         const updatedDate = new Date().toLocaleDateString();
-        currentEditingContainer.dateElement.textContent = updatedDate;
+        dateElement.textContent = updatedDate;
+
+        updatePBInStorage(uniqueKey, updatedTime);
+        savePBToStorage();
 
         homeSection.style.display = "flex";
-        addPbSection.style.display = "none";
-        profileSection.style.display = "none";
         editSection.style.display = "none";
-        returnButton.style.visibility = "hidden";
-
         currentEditingContainer = null;
     } else {
         alert("Kein Element zum Bearbeiten gefunden.");
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadPBData();
+});
