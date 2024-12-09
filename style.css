@@ -135,11 +135,11 @@ body {
 }
 
 .edit-button {
-    background-image: url('../assets/edit-icon.svg');
+    background-image: url('assets/edit-icon.svg');
 }
 
 .delete-button {
-    background-image: url('../assets/delete-icon.svg');
+    background-image: url('assets/delete-icon.svg');
 }
 
 /*? profile section*/
