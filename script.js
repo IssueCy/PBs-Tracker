@@ -161,12 +161,16 @@ function renderPB(pb) {
     section.appendChild(newPbContainer);
 }
 
-timeInput.value = "00:00:00";
-
 function saveAndDisplayPB() {
     let eventType = eventInput.value;
-    let time = timeInput.value;
     let course = courseInput.value;
+    
+    // Werte aus den benutzerdefinierten Zeitfeldern abrufen
+    let minutes = document.getElementById("minutes").value.padStart(2, '0');
+    let seconds = document.getElementById("seconds").value.padStart(2, '0');
+    let milliseconds = document.getElementById("milliseconds").value;
+
+    let time = `${minutes}:${seconds}.${milliseconds}`;
     let uniqueEventKey = `${eventType}-${course}`;
     let dateOfCreation = new Date().toLocaleDateString();
 
@@ -178,10 +182,6 @@ function saveAndDisplayPB() {
     if (addedEvents.has(uniqueEventKey)) {
         alert("Diese Strecke wurde bereits hinzugefügt.");
         return;
-    }
-
-    if (time.startsWith("00:")) {
-        time = time.substring(3);
     }
 
     const pb = {
@@ -200,7 +200,9 @@ function saveAndDisplayPB() {
     savePBToStorage();
 
     eventInput.selectedIndex = 0;
-    timeInput.value = "00:00:00";
+    document.getElementById("minutes").value = "";
+    document.getElementById("seconds").value = "";
+    document.getElementById("milliseconds").value = "";
     courseInput.selectedIndex = 0;
 
     homeSection.style.display = "flex";
@@ -214,23 +216,23 @@ function updateUI() {
     pbData.forEach(pb => renderPB(pb));
 }
 
-function displayEditTimeSection(currentTime) {
+function displayEditTimeSection() {
     homeSection.style.display = "none";
     addPbSection.style.display = "none";
     profileSection.style.display = "none";
     editSection.style.display = "flex";
     returnButton.style.visibility = "visible";
-    newTime.value = "00:00:00";
 }
 
 
 function editTime() {
-    let updatedTime = newTime.value;
-    if (currentEditingContainer) {
-        if (updatedTime.startsWith("00:")) {
-            updatedTime = updatedTime.substring(3);
-        }
+    let updatedMinutes = document.getElementById("newMinutes").value.padStart(2, '0');
+    let updatedSeconds = document.getElementById("newSeconds").value.padStart(2, '0');
+    let updatedMilliseconds = document.getElementById("newMilliseconds").value;
 
+    let updatedTime = `${updatedMinutes}:${updatedSeconds}.${updatedMilliseconds}`;
+    
+    if (currentEditingContainer) {
         const { timeElement, dateElement, uniqueKey } = currentEditingContainer;
 
         timeElement.textContent = updatedTime;
@@ -276,7 +278,7 @@ function compareEvents(a, b) {
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
     loadPBData();
 
     //* Cookie Baner

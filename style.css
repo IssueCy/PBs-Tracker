@@ -66,11 +66,8 @@ body {
 #shortCourse-new-container-wrapper,
 #longCourse-new-container-wrapper {
     display: flex;
-    /* Aktiviert Flexbox */
     flex-wrap: wrap;
-    /* Erlaubt den Umbruch in eine neue Zeile */
     gap: 16px;
-    /* Abstand zwischen den Containern */
     justify-content: flex-start;
 }
 
@@ -90,6 +87,7 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: #94B9FF;
+    overflow: hidden;
 }
 
 .buttonWrapper {
@@ -122,6 +120,28 @@ body {
     font-size: 16px;
 }
 
+#time-input-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+#time-input-container input {
+    width: 70px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid #283575;
+    padding-left: 12px;
+    font-size: 16px;
+}
+
+#time-input-container label {
+    font-size: large;
+    margin-top: 0;
+    margin-bottom: 4px;
+    display: block;
+}
+
 .edit-button,
 .delete-button {
     padding: 6px;
@@ -141,6 +161,8 @@ body {
 .delete-button {
     background-image: url('assets/delete-icon.svg');
 }
+
+
 
 /*? profile section*/
 #profile-section-container {

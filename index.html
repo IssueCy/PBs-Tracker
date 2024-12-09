@@ -18,7 +18,8 @@
 
     <div class="top-section">
         <div class="top-section-wrapper">
-            <button class="returnToHome" id="return-button"><img src="assets/arrow-back-icon.svg" alt="return-button"></button>
+            <button class="returnToHome" id="return-button"><img src="assets/arrow-back-icon.svg"
+                    alt="return-button"></button>
             <img class="tsg-logo" src="assets/tsg-logo.png" alt="tsg-logo">
         </div>
     </div>
@@ -72,9 +73,19 @@
             <option value="200 Lagen">200 Lagen</option>
             <option value="400 Lagen">400 Lagen</option>
         </select>
-        <label for="timeInput">Zeit </label>
-        <input id="timeInput" type="time" step="0.001">
-        <label for="courseInput">Bahnlänge </label>
+
+        <br>
+
+        <label>Zeit</label>
+        <div id="time-input-container">
+            <input id="minutes" type="number" maxlength="2" min="0" max="59" placeholder="MM">
+            <input id="seconds" type="number" maxlength="2" min="0" max="59" placeholder="SS">
+            <input id="milliseconds" type="number" maxlength="2" min="0" max="999" placeholder="MS">
+        </div>
+
+        <br>
+
+        <label for="courseInput">Bahnlänge</label>
         <select name="cours" id="courseInput">
             <option>25m</option>
             <option>50m</option>
@@ -95,27 +106,31 @@
         <br>
         <p>
             Daten, die innerhalb dieser App generiert wurden, werden lokal auf deinem Gerät gespeichert.
-        <br>
+            <br>
             Es werden keine Daten auf Servern oder in Datenbanken gespeichert.
-        <br>
-        Du kannst deine Daten jederzeit restlos löschen, indem du auf "Daten löschen" klickst.
+            <br>
+            Du kannst deine Daten jederzeit restlos löschen, indem du auf "Daten löschen" klickst.
         </p>
 
         <img src="assets/Swim-rafiki.svg" alt="Swim illustration">
     </div>
 
     <!-- Edit time section -->
-     <div id="edit-time-container">
+    <div id="edit-time-container">
         <h3>Bearbeiten</h3>
         <br>
         <p id="time-to-edit-container" style="font-weight: bold;"></p>
-        <label for="newTimeInput">Neue Zeit</label>
-        <input id="newTimeInput" type="time" step="0.001">
-        <br><br>
+        <div id="time-input-container">
+            <input id="newMinutes" type="number" maxlength="2" min="0" max="59" placeholder="MM">
+            <input id="newSeconds" type="number" maxlength="2" min="0" max="59" placeholder="SS">
+            <input id="newMilliseconds" type="number" maxlength="2" min="0" max="999" placeholder="MS">
+        </div>
+
+        <br>
         <button class="button_primary" onclick="editTime()">Speichern</button>
-     </div>
-    
-    
+    </div>
+
+
     <!-- Navbar Section -->
     <div id="navbar" class="navbar">
         <button class="nav-buttons returnToHome" id="nav-home-section-button"><img src="assets/home-icon.svg"
@@ -129,7 +144,8 @@
     <div id="cookie-banner">
         <p>Um die App zum Homescreen hinzuzufügen, folge den Schritten:</p>
         <br>
-        <p>Für Chrome: Klicke oben rechts auf die drei Punkte, dann auf "Zum Startbildschirm hinzufügen" oder "Add to homescreen".</p>
+        <p>Für Chrome: Klicke oben rechts auf die drei Punkte, dann auf "Zum Startbildschirm hinzufügen" oder "Add to
+            homescreen".</p>
         <br>
         <p>Für Safari: Klicke auf 'Teilen' und dann auf "Zum Startbildschirm hinzufügen" oder "Add to homescreen".</p>
         <br>
@@ -138,7 +154,7 @@
         <button style="width: 100px; height: 32px;" id="accept-cookies">OK</button>
     </div>
 
-
     <script src="script.js"></script>
 </body>
+
 </html>
