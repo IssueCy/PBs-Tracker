@@ -57,15 +57,20 @@ body {
     margin-bottom: 24px;
 }
 
-#shortCourse-section, #longCourse-section {
+#shortCourse-section,
+#longCourse-section {
     display: flex;
     flex-direction: column;
 }
 
-#shortCourse-new-container-wrapper, #longCourse-new-container-wrapper {
-    display: flex; /* Aktiviert Flexbox */
-    flex-wrap: wrap; /* Erlaubt den Umbruch in eine neue Zeile */
-    gap: 16px; /* Abstand zwischen den Containern */
+#shortCourse-new-container-wrapper,
+#longCourse-new-container-wrapper {
+    display: flex;
+    /* Aktiviert Flexbox */
+    flex-wrap: wrap;
+    /* Erlaubt den Umbruch in eine neue Zeile */
+    gap: 16px;
+    /* Abstand zwischen den Containern */
     justify-content: flex-start;
 }
 
@@ -99,13 +104,16 @@ body {
     align-items: center;
 }
 
-#addPb-section-container label, #edit-time-container label {
+#addPb-section-container label,
+#edit-time-container label {
     margin-top: 12px;
     margin-bottom: 4px;
     font-size: large;
 }
 
-#addPb-section-container select, #addPb-section-container input, #edit-time-container input {
+#addPb-section-container select,
+#addPb-section-container input,
+#edit-time-container input {
     height: 32px;
     width: 50%;
     border-radius: 8px;
@@ -114,7 +122,8 @@ body {
     font-size: 16px;
 }
 
-.edit-button, .delete-button {
+.edit-button,
+.delete-button {
     padding: 6px;
     border: none;
     border-radius: 6px;
@@ -195,4 +204,51 @@ body {
 
 .nav-buttons img {
     width: 40px;
+}
+
+/*?  Cookie Banner*/
+#cookie-banner {
+    position: fixed;
+    bottom: -100px;
+    left: 10px;
+    right: 10px;
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out, bottom 0.5s ease-out;
+}
+
+#cookie-banner button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#cookie-banner button:hover {
+    background: #0056b3;
+}
+
+#cookie-banner.show {
+    bottom: 100px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@keyframes slide-in {
+    from {
+        bottom: -100px;
+    }
+    to {
+        bottom: 10px;
+    }
 }

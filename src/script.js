@@ -162,6 +162,7 @@ function renderPB(pb) {
 }
 
 timeInput.value = "00:00:00";
+
 function saveAndDisplayPB() {
     let eventType = eventInput.value;
     let time = timeInput.value;
@@ -192,8 +193,10 @@ function saveAndDisplayPB() {
 
     addedEvents.add(uniqueEventKey);
     pbData.push(pb);
-    renderPB(pb);
 
+    pbData.sort(compareEvents);
+
+    updateUI();
     savePBToStorage();
 
     eventInput.selectedIndex = 0;
@@ -202,6 +205,13 @@ function saveAndDisplayPB() {
 
     homeSection.style.display = "flex";
     addPbSection.style.display = "none";
+}
+
+function updateUI() {
+    shortCourseSection.innerHTML = "";
+    longCourseSection.innerHTML = "";
+
+    pbData.forEach(pb => renderPB(pb));
 }
 
 function displayEditTimeSection(currentTime) {
@@ -238,6 +248,56 @@ function editTime() {
     }
 }
 
+//? Sortin algorithm
+const swimOrder = {
+    "Delfin": 1,
+    "Rücken": 2,
+    "Brust": 3,
+    "Kraul": 4,
+    "Lagen": 5,
+};
+
+const distanceOrder = [50, 100, 200, 400, 800, 1500];
+
+function compareEvents(a, b) {
+    const [distanceA, strokeA] = a.event.split(" ");
+    const [distanceB, strokeB] = b.event.split(" ");
+
+    const strokeOrderA = swimOrder[strokeA];
+    const strokeOrderB = swimOrder[strokeB];
+    if (strokeOrderA !== strokeOrderB) {
+        return strokeOrderA - strokeOrderB;
+    }
+
+    const distanceIndexA = distanceOrder.indexOf(parseInt(distanceA, 10));
+    const distanceIndexB = distanceOrder.indexOf(parseInt(distanceB, 10));
+    return distanceIndexA - distanceIndexB;
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     loadPBData();
+
+    //* Cookie Baner
+    const cookieBanner = document.getElementById("cookie-banner");
+    const acceptCookiesButton = document.getElementById("accept-cookies");
+
+    const nav = document.getElementById('navbar');
+
+    if (!localStorage.getItem("cookiesAccepted")) {
+        cookieBanner.classList.add("show");
+
+        nav.style.pointerEvents = "none";
+        homeSection.style.pointerEvents = "none";
+    }
+
+    acceptCookiesButton.addEventListener("click", () => {
+        localStorage.setItem("cookiesAccepted", "true");
+        cookieBanner.classList.remove("show");
+
+        nav.style.pointerEvents = "auto";
+        homeSection.style.pointerEvents = "auto";
+    });
 });
+
