@@ -57,7 +57,7 @@ document.getElementById('deleteData-button').addEventListener('click', (event) =
 
 //? export data
 function exportData() {
-    if (confirm("You are about to download the 'data.json' file containing your PB data.")) {
+    if (confirm("You are about to download the 'pbData.json' file containing your PB data.")) {
       const data = {
         pbData: JSON.parse(localStorage.getItem("pbData")) || []
       };
