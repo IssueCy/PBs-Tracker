@@ -11,7 +11,7 @@ PB's Tracker is a web app that allows swimmers to record and track their persona
 - **Data Backup and Transfer**: Export your data in a downloadable file format to transfer to another device or keep a backup.
 
 ### How to Use
-- On Chrome, while on the homepage of the app, click the three dots in the top right corner, then click on "Add to home screen"
+- On Chrome, while on the homepage of the app (https://aqua-tracker.pages.dev), click the three dots in the top right corner, then click on "Add to home screen"
 
 ### Data Privacy
 PB's Tracker stores data locally on your device. There are no external servers or databases involved, meaning that your personal bests and other data remain private and are only accessible on the device where they were saved.  
@@ -34,7 +34,7 @@ PB's Tracker ist eine Web-App, mit der User ihre persönlichen Bestzeiten (PB) b
 - **Datenexport und -übertragung**: Exportiere deine Daten in eine Datei, um sie auf einem anderen Gerät zu verwenden oder als Backup zu sichern.
 
 ### Anleitung
-- **Für Chrome**: Während du auf der Startseite der App bist, klicke auf die drei Punkte in der oberen rechten Ecke. Wähle "Zum Startbildschirm hinzufügen" aus.  
+- **Für Chrome**: Während du auf der Startseite der App bist (https://aqua-tracker.pages.dev), klicke auf die drei Punkte in der oberen rechten Ecke. Wähle "Zum Startbildschirm hinzufügen" aus.  
 ### Datenschutz
 PB's Tracker speichert die Daten ausschließlich lokal auf deinem Gerät. Es werden keine externen Server oder Datenbanken verwendet, sodass deine persönlichen Bestzeiten und andere Daten privat bleiben und nur auf dem Gerät zugänglich sind, auf dem sie gespeichert wurden.  
 Du hast jederzeit die Möglichkeit, deine Daten restlos zu löschen.
