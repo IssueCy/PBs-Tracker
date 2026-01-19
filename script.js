@@ -81,22 +81,22 @@ document.getElementById('deleteData-button').addEventListener('click', (event) =
 //? export data
 function exportData() {
     if (confirm("You are about to download the 'pbData.json' file containing your PB data.")) {
-      const data = {
-        pbData: JSON.parse(localStorage.getItem("pbData")) || [],
-        gymData: JSON.parse(localStorage.getItem("gymData")) || []
-      };
+        const data = {
+            pbData: JSON.parse(localStorage.getItem("pbData")) || [],
+            gymData: JSON.parse(localStorage.getItem("gymData")) || []
+        };
 
-      const dataStr = JSON.stringify(data, null, 2);
-      const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+        const dataStr = JSON.stringify(data, null, 2);
+        const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
 
-      const exportFileDefaultName = "pbData.json";
-  
-      const linkElement = document.createElement("a");
-      linkElement.setAttribute("href", dataUri);
-      linkElement.setAttribute("download", exportFileDefaultName);
-      linkElement.click();
+        const exportFileDefaultName = "pbData.json";
+
+        const linkElement = document.createElement("a");
+        linkElement.setAttribute("href", dataUri);
+        linkElement.setAttribute("download", exportFileDefaultName);
+        linkElement.click();
     }
-  }
+}
 
 //? Add PB logic
 
@@ -192,7 +192,7 @@ function renderPB(pb) {
 function saveAndDisplayPB() {
     let eventType = eventInput.value;
     let course = courseInput.value;
-    
+
     let minutes = document.getElementById("minutes").value.padStart(2, '0');
     let seconds = document.getElementById("seconds").value.padStart(2, '0');
     let milliseconds = document.getElementById("milliseconds").value;
@@ -256,6 +256,7 @@ function displayEditTimeSection() {
 function saveGymEntry() {
     const exercise = document.getElementById("gymExerciseInput").value.trim();
     const weight = document.getElementById("gymWeightInput").value;
+    const reps = document.getElementById("gymRepInput").value;
     const dateOfCreation = new Date().toLocaleDateString();
 
     if (!exercise || !weight) {
@@ -266,6 +267,7 @@ function saveGymEntry() {
     const gymEntry = {
         exercise: exercise,
         weight: weight,
+        reps: reps,
         date: dateOfCreation
     };
 
@@ -276,6 +278,7 @@ function saveGymEntry() {
 
     document.getElementById("gymExerciseInput").value = "";
     document.getElementById("gymWeightInput").value = "";
+    document.getElementById("gymRepInput").value = "";
 
     homeSection.style.display = "flex";
     addGymSection.style.display = "none";
@@ -301,6 +304,13 @@ function renderGymEntry(entry, index) {
     const weightElement = document.createElement("p");
     weightElement.textContent = `${entry.weight} kg`;
     weightElement.style.fontWeight = "bold";
+
+    if (entry.reps && entry.reps.trim() !== "") {
+        const repsElement = document.createElement("p");
+        repsElement.textContent = `${entry.reps} Wdh.`;
+        repsElement.style.fontStyle = "italic";
+        container.appendChild(repsElement);
+    }
 
     const buttonWrapper = document.createElement("div");
     buttonWrapper.classList.add("buttonWrapper");
@@ -342,6 +352,7 @@ function openEditGym(index) {
 
     document.getElementById("gym-edit-exercise").textContent = entry.exercise;
     document.getElementById("newGymWeight").value = entry.weight;
+    document.getElementById("newReps").value = entry.reps;
 
     returnButton.style.visibility = "visible";
     addGymSection.style.display = "none";
@@ -356,7 +367,7 @@ function editTime() {
     let updatedMilliseconds = document.getElementById("newMilliseconds").value;
 
     let updatedTime = `${updatedMinutes}:${updatedSeconds}.${updatedMilliseconds}`;
-    
+
     if (currentEditingContainer) {
         const { timeElement, dateElement, uniqueKey } = currentEditingContainer;
 
@@ -377,6 +388,7 @@ function editTime() {
 
 function editGymEntry() {
     const newWeight = document.getElementById("newGymWeight").value;
+    const newReps = document.getElementById("newReps");
 
     if (!newWeight) {
         alert("Bitte ein Gewicht eingeben.");
@@ -384,6 +396,7 @@ function editGymEntry() {
     }
 
     gymData[currentGymEditIndex].weight = newWeight;
+    gymData[currentGymEditIndex].reps = newReps;
     gymData[currentGymEditIndex].date = new Date().toLocaleDateString();
 
     saveGymToStorage();
