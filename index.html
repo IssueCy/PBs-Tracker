@@ -27,6 +27,7 @@
     <!-- Home section -->
     <div id="main-section-container">
         <button class="button_primary addPbButton" id="addPB-button">Neue Bestzeit hinzufügen</button>
+        <button class="button_primary addGymButton" id="addGym-button">Neue Gym-Leistung</button>
 
         <div id="shortCourse-section">
             <span class="course-span">Kurzbahn</span>
@@ -43,6 +44,18 @@
 
             </div>
         </div>
+
+        <br>
+
+        <div id="gym-section">
+            <span class="course-span">Gym</span>
+            <div id="gym-entries-wrapper">
+
+            </div>
+        </div>
+
+        <br>
+        <br>
         <br>
         <br>
         <br>
@@ -94,6 +107,23 @@
         <button onclick="saveAndDisplayPB()" class="button_primary" id="create-new-pb-button">Speichern</button>
     </div>
 
+    <!-- ADD GYM SECTION -->
+    <div id="addGym-section-container">
+        <h3>Neue Gym-Leistung</h3>
+
+        <label>Übung</label>
+        <input id="gymExerciseInput" type="text" placeholder="z.B. Bankdrücken">
+
+        <br><br>
+
+        <label>Gewicht (kg)</label>
+        <input id="gymWeightInput" type="number" placeholder="z.B. 100">
+
+        <br><br>
+
+        <button class="button_primary" onclick="saveGymEntry()">Speichern</button>
+    </div>
+
     <!-- Profile Section -->
     <div id="profile-section-container">
         <h3>Dein Profil</h3>
@@ -130,13 +160,30 @@
         <button class="button_primary" onclick="editTime()">Speichern</button>
     </div>
 
+    <!-- EDIT GYM SECTION -->
+    <div id="edit-gym-container">
+        <h3>Gym-Leistung bearbeiten</h3>
+        <br>
+        <p id="gym-edit-exercise" style="font-weight:bold;"></p>
+        <br>
+        <label>Neues Gewicht (kg)</label>
+        <br>
+        <input id="newGymWeight" type="number">
+
+        <br><br>
+
+        <button class="button_primary" onclick="editGymEntry()">Speichern</button>
+    </div>
+
 
     <!-- Navbar Section -->
     <div id="navbar" class="navbar">
         <button class="nav-buttons returnToHome" id="nav-home-section-button"><img src="assets/home-icon.svg"
                 alt="home-icon"></button>
-        <button class="nav-buttons addPbButton" id="nav-add-section-button"><img src="assets/add-icon.svg"
+        <button class="nav-buttons addPbButton"><img src="assets/pool_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"
                 alt="add-icon"></button>
+        <button class="nav-buttons addGymButton"><img
+                src="assets/fitness_center_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="add-icon"></button>
         <button class="nav-buttons" id="nav-profile-section-button"><img src="assets/account-icon.svg"
                 alt="profile-icon"></button>
     </div>

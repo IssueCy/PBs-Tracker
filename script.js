@@ -4,8 +4,10 @@ const longCourseSection = document.getElementById('longCourse-new-container-wrap
 //? Navigation button logic
 const homeSection = document.getElementById('main-section-container');
 const addPbSection = document.getElementById('addPb-section-container');
+const addGymSection = document.getElementById('addGym-section-container');
 const profileSection = document.getElementById('profile-section-container');
 const editSection = document.getElementById('edit-time-container');
+const editGymSection = document.getElementById('edit-gym-container');
 
 //* home tab
 const returnToHome = document.querySelectorAll('.returnToHome');
@@ -15,8 +17,10 @@ for (button of returnToHome) {
         document.getElementById('return-button').style.visibility = "hidden";
         homeSection.style.display = "flex";
         addPbSection.style.display = "none";
+        addGymSection.style.display = "none";
         profileSection.style.display = "none";
         editSection.style.display = "none";
+        editGymSection.style.display = "none";
     });
 }
 
@@ -31,6 +35,23 @@ for (button of addPbButtons) {
         homeSection.style.display = "none";
         profileSection.style.display = "none";
         editSection.style.display = "none";
+        addGymSection.style.display = "none";
+        editGymSection.style.display = "none";
+    });
+}
+
+//* add gym tab
+const addGymButton = document.querySelectorAll('.addGymButton');
+
+for (button of addGymButton) {
+    button.addEventListener('click', () => {
+        addPbSection.style.display = "none";
+        returnButton.style.visibility = "visible";
+        homeSection.style.display = "none";
+        profileSection.style.display = "none";
+        editSection.style.display = "none";
+        addGymSection.style.display = "flex";
+        editGymSection.style.display = "none";
     });
 }
 
@@ -43,6 +64,8 @@ profileButton.addEventListener('click', () => {
     homeSection.style.display = "none";
     addPbSection.style.display = "none";
     editSection.style.display = "none";
+    addGymSection.style.display = "none";
+    editGymSection.style.display = "none";
 });
 
 //? Delete data
@@ -59,7 +82,8 @@ document.getElementById('deleteData-button').addEventListener('click', (event) =
 function exportData() {
     if (confirm("You are about to download the 'pbData.json' file containing your PB data.")) {
       const data = {
-        pbData: JSON.parse(localStorage.getItem("pbData")) || []
+        pbData: JSON.parse(localStorage.getItem("pbData")) || [],
+        gymData: JSON.parse(localStorage.getItem("gymData")) || []
       };
 
       const dataStr = JSON.stringify(data, null, 2);
@@ -84,6 +108,10 @@ let newTime = document.getElementById('newTimeInput');
 let addedEvents = new Set();
 let currentEditingContainer = null;
 let pbData = JSON.parse(localStorage.getItem('pbData')) || [];
+
+const gymWrapper = document.getElementById("gym-entries-wrapper");
+let gymData = JSON.parse(localStorage.getItem("gymData")) || [];
+let currentGymEditIndex = null;
 
 function loadPBData() {
     pbData.forEach((pb) => {
@@ -165,7 +193,6 @@ function saveAndDisplayPB() {
     let eventType = eventInput.value;
     let course = courseInput.value;
     
-    // Werte aus den benutzerdefinierten Zeitfeldern abrufen
     let minutes = document.getElementById("minutes").value.padStart(2, '0');
     let seconds = document.getElementById("seconds").value.padStart(2, '0');
     let milliseconds = document.getElementById("milliseconds").value;
@@ -224,6 +251,104 @@ function displayEditTimeSection() {
     returnButton.style.visibility = "visible";
 }
 
+//! --- gym ---
+
+function saveGymEntry() {
+    const exercise = document.getElementById("gymExerciseInput").value.trim();
+    const weight = document.getElementById("gymWeightInput").value;
+    const dateOfCreation = new Date().toLocaleDateString();
+
+    if (!exercise || !weight) {
+        alert("Bitte fülle alle Felder aus.");
+        return;
+    }
+
+    const gymEntry = {
+        exercise: exercise,
+        weight: weight,
+        date: dateOfCreation
+    };
+
+    gymData.push(gymEntry);
+
+    saveGymToStorage();
+    updateGymUI();
+
+    document.getElementById("gymExerciseInput").value = "";
+    document.getElementById("gymWeightInput").value = "";
+
+    homeSection.style.display = "flex";
+    addGymSection.style.display = "none";
+}
+
+function updateGymUI() {
+    gymWrapper.innerHTML = "";
+    gymData.forEach((entry, index) => renderGymEntry(entry, index));
+}
+
+function renderGymEntry(entry, index) {
+    const container = document.createElement("div");
+    container.classList.add("newGymContainer");
+
+    const dateElement = document.createElement("p");
+    dateElement.textContent = entry.date;
+    dateElement.style.color = "#686868";
+
+    const exerciseElement = document.createElement("p");
+    exerciseElement.textContent = entry.exercise;
+    exerciseElement.style.fontWeight = "bold";
+
+    const weightElement = document.createElement("p");
+    weightElement.textContent = `${entry.weight} kg`;
+    weightElement.style.fontWeight = "bold";
+
+    const buttonWrapper = document.createElement("div");
+    buttonWrapper.classList.add("buttonWrapper");
+
+    // EDIT BUTTON
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    editButton.onclick = () => openEditGym(index);
+
+    // DELETE BUTTON
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete-button");
+    deleteButton.onclick = () => deleteGymEntry(index);
+
+    buttonWrapper.appendChild(editButton);
+    buttonWrapper.appendChild(deleteButton);
+
+    container.appendChild(dateElement);
+    container.appendChild(exerciseElement);
+    container.appendChild(weightElement);
+    container.appendChild(buttonWrapper);
+
+    gymWrapper.appendChild(container);
+}
+
+function saveGymToStorage() {
+    localStorage.setItem("gymData", JSON.stringify(gymData));
+}
+
+function deleteGymEntry(index) {
+    gymData.splice(index, 1);
+    saveGymToStorage();
+    updateGymUI();
+}
+
+function openEditGym(index) {
+    currentGymEditIndex = index;
+    const entry = gymData[index];
+
+    document.getElementById("gym-edit-exercise").textContent = entry.exercise;
+    document.getElementById("newGymWeight").value = entry.weight;
+
+    returnButton.style.visibility = "visible";
+    addGymSection.style.display = "none";
+    homeSection.style.display = "none";
+    addGymSection.style.display = "none";
+    editGymSection.style.display = "flex";
+}
 
 function editTime() {
     let updatedMinutes = document.getElementById("newMinutes").value.padStart(2, '0');
@@ -248,6 +373,26 @@ function editTime() {
     } else {
         alert("Kein Element zum Bearbeiten gefunden.");
     }
+}
+
+function editGymEntry() {
+    const newWeight = document.getElementById("newGymWeight").value;
+
+    if (!newWeight) {
+        alert("Bitte ein Gewicht eingeben.");
+        return;
+    }
+
+    gymData[currentGymEditIndex].weight = newWeight;
+    gymData[currentGymEditIndex].date = new Date().toLocaleDateString();
+
+    saveGymToStorage();
+    updateGymUI();
+
+    editGymSection.style.display = "none";
+    homeSection.style.display = "flex";
+
+    currentGymEditIndex = null;
 }
 
 //? Sortin algorithm
@@ -280,6 +425,7 @@ function compareEvents(a, b) {
 
 document.addEventListener('DOMContentLoaded', function () {
     loadPBData();
+    updateGymUI();
 
     //* Cookie Baner
     const cookieBanner = document.getElementById("cookie-banner");

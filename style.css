@@ -52,19 +52,22 @@ body {
     flex-direction: column;
 }
 
-#addPB-button {
+#addPB-button,
+#addGym-button {
     align-self: center;
     margin-bottom: 24px;
 }
 
 #shortCourse-section,
-#longCourse-section {
+#longCourse-section,
+#gym-section {
     display: flex;
     flex-direction: column;
 }
 
 #shortCourse-new-container-wrapper,
-#longCourse-new-container-wrapper {
+#longCourse-new-container-wrapper,
+#gym-entries-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -86,7 +89,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #94B9FF;
+    background-color: #94b9ffd5;
+    overflow: hidden;
+}
+
+.newGymContainer {
+    margin: 8px;
+    padding: 12px;
+    width: 130px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e2a95fc5;
     overflow: hidden;
 }
 
@@ -96,14 +111,15 @@ body {
 }
 
 /*? add PB section */
-#addPb-section-container {
+#addPb-section-container,
+#addGym-section-container {
     display: none;
     flex-direction: column;
     align-items: center;
 }
 
 #addPb-section-container label,
-#edit-time-container label {
+#addGym-section-container label {
     margin-top: 12px;
     margin-bottom: 4px;
     font-size: large;
@@ -111,7 +127,9 @@ body {
 
 #addPb-section-container select,
 #addPb-section-container input,
-#edit-time-container input {
+#edit-time-container input,
+#addGym-section-container input,
+#edit-gym-container input {
     height: 32px;
     width: 50%;
     border-radius: 8px;
@@ -198,7 +216,8 @@ body {
 }
 
 /*? edit time section*/
-#edit-time-container {
+#edit-time-container,
+#edit-gym-container {
     display: none;
     flex-direction: column;
     align-items: center;
