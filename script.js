@@ -305,6 +305,10 @@ function renderGymEntry(entry, index) {
     weightElement.textContent = `${entry.weight} kg`;
     weightElement.style.fontWeight = "bold";
 
+    container.appendChild(dateElement);
+    container.appendChild(exerciseElement);
+    container.appendChild(weightElement);
+
     if (entry.reps && entry.reps.trim() !== "") {
         const repsElement = document.createElement("p");
         repsElement.textContent = `${entry.reps} Wdh.`;
@@ -325,13 +329,9 @@ function renderGymEntry(entry, index) {
     deleteButton.classList.add("delete-button");
     deleteButton.onclick = () => deleteGymEntry(index);
 
+    container.appendChild(buttonWrapper);
     buttonWrapper.appendChild(editButton);
     buttonWrapper.appendChild(deleteButton);
-
-    container.appendChild(dateElement);
-    container.appendChild(exerciseElement);
-    container.appendChild(weightElement);
-    container.appendChild(buttonWrapper);
 
     gymWrapper.appendChild(container);
 }
