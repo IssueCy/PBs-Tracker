@@ -256,7 +256,7 @@ function displayEditTimeSection() {
 function saveGymEntry() {
     const exercise = document.getElementById("gymExerciseInput").value.trim();
     const weight = document.getElementById("gymWeightInput").value;
-    const reps = document.getElementById("gymRepInput").value;
+    const reps = document.getElementById("gymRepInput").value.trim();
     const dateOfCreation = new Date().toLocaleDateString();
 
     if (!exercise || !weight) {
@@ -309,7 +309,7 @@ function renderGymEntry(entry, index) {
     container.appendChild(exerciseElement);
     container.appendChild(weightElement);
 
-    if (entry.reps && entry.reps.trim() !== "") {
+    if (entry.reps) {
         const repsElement = document.createElement("p");
         repsElement.textContent = `${entry.reps} Wdh.`;
         repsElement.style.fontStyle = "italic";
@@ -388,7 +388,7 @@ function editTime() {
 
 function editGymEntry() {
     const newWeight = document.getElementById("newGymWeight").value;
-    const newReps = document.getElementById("newReps");
+    const newReps = document.getElementById("newReps").value.trim();
 
     if (!newWeight) {
         alert("Bitte ein Gewicht eingeben.");
@@ -396,7 +396,7 @@ function editGymEntry() {
     }
 
     gymData[currentGymEditIndex].weight = newWeight;
-    gymData[currentGymEditIndex].reps = newReps;
+    gymData[currentGymEditIndex].reps = newReps !== "" ? newReps : null;
     gymData[currentGymEditIndex].date = new Date().toLocaleDateString();
 
     saveGymToStorage();
